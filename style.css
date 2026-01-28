@@ -1,0 +1,295 @@
+/* ==================================================
+   RAHMANIYA BRANDING WEBSITE - STYLE.CSS
+   Easy to edit • Clean • Professional
+================================================== */
+
+/* ---------- ROOT VARIABLES (EDIT COLORS HERE) ---------- */
+:root {
+  --blue-dark: #0a2540;      /* Navy / Deep Blue */
+  --blue-light: #1f4e79;    /* Soft Blue */
+  --green-main: #8cc63f;    /* Logo Green */
+  --white: #ffffff;
+  --black: #000000;
+  --bg-light: #f5f8fb;
+}
+
+/* ---------- RESET ---------- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Arial, sans-serif;
+}
+
+body {
+  background: var(--white);
+  color: var(--blue-dark);
+  line-height: 1.6;
+}
+
+/* ---------- LOGO INTRO ---------- */
+#intro {
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(135deg, var(--blue-dark), var(--blue-light));
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  animation: fadeOut 1s ease forwards;
+  animation-delay: 3s; /* EDIT INTRO DURATION HERE */
+}
+
+.intro-logo {
+  width: 140px;
+  animation: logoZoom 2s ease forwards;
+}
+
+.intro-tagline {
+  color: var(--white);
+  margin-top: 12px;
+  font-size: 1rem;
+  opacity: 0;
+  animation: fadeIn 1s ease forwards;
+  animation-delay: 1.8s;
+}
+
+/* ---------- NAVBAR ---------- */
+header {
+  position: sticky;
+  top: 0;
+  background: var(--white);
+  z-index: 100;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.navbar {
+  max-width: 1200px;
+  margin: auto;
+  padding: 12px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: bold;
+}
+
+.logo img {
+  width: 40px;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: var(--blue-dark);
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+.nav-links a:hover {
+  color: var(--green-main);
+}
+
+/* ---------- HERO ---------- */
+.hero {
+  min-height: 90vh;
+  background: linear-gradient(
+    rgba(10,37,64,0.85),
+    rgba(10,37,64,0.85)
+  ),
+  url("hero.jpg") center/cover no-repeat;
+  color: var(--white);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 20px;
+}
+
+.hero h1 {
+  font-size: 2.6rem;
+  margin-bottom: 10px;
+}
+
+.tagline {
+  font-size: 1.2rem;
+  margin-bottom: 25px;
+  color: var(--green-main);
+}
+
+/* ---------- BUTTONS ---------- */
+.btn {
+  padding: 12px 24px;
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.primary {
+  background: var(--green-main);
+  color: var(--black);
+}
+
+.secondary {
+  background: transparent;
+  color: var(--white);
+  border: 2px solid var(--white);
+}
+
+.btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+}
+
+/* ---------- SECTIONS ---------- */
+.section {
+  max-width: 1200px;
+  margin: auto;
+  padding: 70px 20px;
+}
+
+.section h2 {
+  text-align: center;
+  margin-bottom: 40px;
+  position: relative;
+}
+
+.section h2::after {
+  content: "";
+  width: 60px;
+  height: 3px;
+  background: var(--green-main);
+  display: block;
+  margin: 10px auto 0;
+}
+
+/* ---------- SPLIT SECTION ---------- */
+.split {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+}
+
+.card {
+  background: var(--bg-light);
+  padding: 30px;
+  border-radius: 14px;
+  transition: transform 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+}
+
+/* ---------- GRID ITEMS ---------- */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.item {
+  background: var(--white);
+  padding: 20px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.item:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+/* ---------- ANNOUNCEMENTS ---------- */
+.announcements {
+  max-width: 500px;
+  margin: auto;
+  list-style: none;
+}
+
+.announcements li {
+  background: var(--bg-light);
+  padding: 12px 16px;
+  margin-bottom: 10px;
+  border-left: 4px solid var(--green-main);
+}
+
+/* ---------- FORMS ---------- */
+form {
+  max-width: 500px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+input,
+textarea {
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+textarea {
+  resize: none;
+  height: 120px;
+}
+
+/* ---------- FOOTER ---------- */
+footer {
+  background: var(--blue-dark);
+  color: var(--white);
+  text-align: center;
+  padding: 20px;
+}
+
+/* ---------- ANIMATIONS ---------- */
+@keyframes logoZoom {
+  from {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+  }
+
+  .hero h1 {
+    font-size: 2rem;
+  }
+}
