@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rahmaniya Group of Institutions | Meppadam</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            /* COLOR PALETTE - STRICT BRANDING */
+            --primary-dark: #0a192f;
+            --navy-deep: #020c1b;
+            --accent-green: #50c878;
+            --soft-mint: #98fb98;
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --text-light: #f8f9fa;
+            --text-dim: #b0b8c3;
+            
+            /* ANIMATION SPEEDS */
+            --intro-duration: 3s;
+            --transition-smooth: 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--navy-deep);
+            color: var(--text-light);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+            letter-spacing: 1px;
+        }
+
+        /* --- INTRO SPLASH SCREEN --- */
+        #intro-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, var(--primary-dark), var(--navy-deep));
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 1s ease;
+        }
+
+        .intro-logo-container {
+            position: relative;
+            text-align: center;
+        }
+
+        .intro-logo {
+            width: 180px;
+            height: auto;
+            opacity: 0;
+            transform: scale(0.8);
+            animation: logoFadeIn var(--intro-duration) forwards;
+            filter: drop-shadow(0 0 20px rgba(80, 200, 120, 0.2));
+        }
+
+        @keyframes logoFadeIn {
+            0% { opacity: 0; transform: scale(0.8); }
+            50% { opacity: 1; transform: scale(1.05); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        .intro-halo {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            border: 2px solid var(--accent-green);
+            opacity: 0;
+            animation: ripple 2s infinite ease-out;
+            animation-delay: 1s;
+        }
+
+        @keyframes ripple {
+            0% { transform: translate(-50%, -50%) scale(0.8); opacity: 0.5; }
+            100% { transform: translate(-50%, -50%) scale(1.5); opacity: 0; }
+        }
+
+        .tagline {
+            margin-top: 2rem;
+            font-size: 1.2rem;
+            color: var(--soft-mint);
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            opacity: 0;
+            animation: fadeInUp 1.5s forwards;
+            animation-delay: 1.5s;
+        }
+
+        /* --- GLASS UI COMPONENTS --- */
+        .glass-panel {
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            border-radius: 30px; /* Logo-inspired curves */
+            padding: 2rem;
+        }
+
+        .navbar {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 1200px;
+            height: 70px;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 40px;
+        }
+
+        .navbar nav a {
+            color: var(--text-light);
+            text-decoration: none;
+            margin-left: 2rem;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: 0.3s;
+        }
+
+        .navbar nav a:hover {
+            color: var(--accent-green);
+            text-shadow: 0 0 10px var(--accent-green);
+        }
+
+        /* --- SECTIONS --- */
+        section {
+            padding: 120px 10%;
+            min-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .hero {
+            background: linear-gradient(rgba(2, 12, 27, 0.8), rgba(2, 12, 27, 0.8)), url('hero-bg.jpg');
+            background-size: cover;
+            background-attachment: fixed;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(to bottom, #fff, var(--text-dim));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 1s ease-out;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- GRID LAYOUTS --- */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            width: 100%;
+            margin-top: 3rem;
+        }
+
+        .card {
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            text-align: left;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(80, 200, 120, 0.1);
+            border-color: var(--accent-green);
+        }
+
+        .card h3 {
+            color: var(--accent-green);
+            margin-bottom: 1rem;
+        }
+
+        .list-item {
+            list-style: none;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            display: flex;
+            align-items: center;
+        }
+
+        .list-item::before {
+            content: "•";
+            color: var(--accent-green);
+            font-size: 1.5rem;
+            margin-right: 15px;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            margin: 40px 10% 20px 10%;
+            text-align: center;
+        }
+
+        .footer-link {
+            color: var(--accent-green);
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .footer-link:hover {
+            text-decoration: underline;
+        }
+
+        .social-icons {
+            margin: 20px 0;
+        }
+
+        .social-icons a {
+            color: var(--text-light);
+            margin: 0 15px;
+            font-size: 1.2rem;
+            transition: 0.3s;
+        }
+
+        .social-icons a:hover {
+            color: var(--accent-green);
+        }
+
+        @keyframes fadeInUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.2rem; }
+            .navbar { padding: 0 20px; }
+            .navbar nav { display: none; } /* Mobile menu would go here */
+            section { padding: 80px 5%; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="intro-overlay">
+        <div class="intro-logo-container">
+            <div class="intro-halo"></div>
+            <img src="logo.png" alt="Rahmaniya Logo" class="intro-logo" onerror="this.style.display='none'; document.getElementById('logo-fallback').style.display='block'">
+            <div id="logo-fallback" style="display:none; font-size: 2rem; color: var(--accent-green); font-weight: bold;">RAHMANIYA</div>
+        </div>
+        <div class="tagline">Nurturing Values, Shaping Futures</div>
+    </div>
+
+    <header class="navbar glass-panel">
+        <div class="brand-name" style="font-weight:600; font-size: 0.9rem;">RAHMANIYA GROUP</div>
+        <nav>
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="#programmes">Programmes</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
+
+    <section id="home" class="hero">
+        <h1 class="reveal">Rahmaniya Group of Institutions</h1>
+        <p class="reveal" style="font-size: 1.2rem; color: var(--text-dim);">Meppadam, Mampad</p>
+        <div class="reveal glass-panel" style="margin-top: 40px; border-radius: 50px; padding: 15px 40px;">
+            <span style="color: var(--accent-green);">●</span> Excellence in Education
+        </div>
+    </section>
+
+    <section id="about">
+        <div class="grid">
+            <div class="glass-panel card reveal">
+                <h3>Our Vision</h3>
+                <p>“Inspire hearts and minds to lead change with value-driven innovation and excellence.”</p>
+            </div>
+            <div class="glass-panel card reveal">
+                <h3>Our Mission</h3>
+                <ul style="text-align: left; margin-top: 15px;">
+                    <li class="list-item">Provide holistic education</li>
+                    <li class="list-item">Nurture leadership and creativity</li>
+                    <li class="list-item">Foster integrity and empathy</li>
+                    <li class="list-item">Prepare responsible citizens</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="programmes">
+        <h2 class="reveal">Talent & Skills Enrichment</h2>
+        <div class="grid">
+            <div class="glass-panel card reveal">
+                <h3>Exams & Academic</h3>
+                <div class="list-item">LSS-R & USS Examination</div>
+                <div class="list-item">HIKMA Talent Exam</div>
+                <div class="list-item">LEAP & STEP Programme</div>
+                <div class="list-item">GK Test & ABACUS</div>
+            </div>
+            <div class="glass-panel card reveal">
+                <h3>Co-Curricular</h3>
+                <div class="list-item">English & Kids Fest</div>
+                <div class="list-item">INSPIRO (Quran Based)</div>
+                <div class="list-item">Martial Arts & Robotics</div>
+                <div class="list-item">HIFD (Insight Academy)</div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h2 class="reveal" style="margin-bottom: 2rem;">Salient Features</h2>
+        <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));">
+            <div class="glass-panel reveal" style="padding: 1.5rem;">Smart Classrooms</div>
+            <div class="glass-panel reveal" style="padding: 1.5rem;">ICT Computer Lab</div>
+            <div class="glass-panel reveal" style="padding: 1.5rem;">Science Lab</div>
+            <div class="glass-panel reveal" style="padding: 1.5rem;">Library</div>
+            <div class="glass-panel reveal" style="padding: 1.5rem;">Transport</div>
+            <div class="glass-panel reveal" style="padding: 1.5rem;">Madrasa Education</div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="glass-panel reveal" style="width: 100%; max-width: 800px;">
+            <h2 style="margin-bottom: 2rem;">Contact & Admissions</h2>
+            <p style="margin-bottom: 1rem;"><strong>Address:</strong> Meppadam, Mampad, Kerala</p>
+            <p style="margin-bottom: 1rem;"><strong>Phone:</strong> +91 [Insert Phone]</p>
+            <p style="margin-bottom: 2rem;"><strong>Email:</strong> info@rahmaniya.com</p>
+            
+            <div class="social-icons">
+                <a href="#">Facebook</a>
+                <a href="#">Instagram</a>
+                <a href="#">WhatsApp</a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="glass-panel">
+        <p>© Rahmaniya Group of Institutions. All Rights Reserved.</p>
+        <p style="font-size: 0.8rem; margin-top: 10px; opacity: 0.7;">
+            Developed by <a href="https://webgeode.com" class="footer-link">WebGeode</a>
+        </p>
+    </footer>
+
+    <script>
+        // CONFIGURATION
+        const SHOW_INTRO = true; // Set to false to disable splash screen
+        const INTRO_TIME = 3500; // Total ms for intro
+
+        window.addEventListener('DOMContentLoaded', () => {
+            const intro = document.getElementById('intro-overlay');
+            
+            if (!SHOW_INTRO) {
+                intro.style.display = 'none';
+            } else {
+                setTimeout(() => {
+                    intro.style.opacity = '0';
+                    setTimeout(() => {
+                        intro.style.display = 'none';
+                    }, 1000);
+                }, INTRO_TIME);
+            }
+
+            // SCROLL REVEAL LOGIC
+            const observerOptions = {
+                threshold: 0.1
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+        });
+    </script>
+</body>
+</html>
